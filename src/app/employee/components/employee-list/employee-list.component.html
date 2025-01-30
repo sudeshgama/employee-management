@@ -1,1 +1,10 @@
-<p>employee-list works!</p>
+<div class="employees-container">
+  @for(employee of employeesList; track employee.id) {
+  <div class="employee">
+    <p>Employee Name: {{employee.name}}</p>
+    <p>Employee Name: {{employee.position}}</p>
+    <p>Employee Name: {{employee.department}}</p>
+    <p>Employee Name: {{employee.email}}</p>
+  </div>
+  }
+</div>

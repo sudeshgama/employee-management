@@ -16,17 +16,17 @@ export const initialState: State = {
 
 const reducer = createReducer(
   initialState,
-  on(saveEmployees, (state, { employees }) => (
+  on(saveEmployees, state => (
     {
       ...state,
-      employees: employees,
       loading: true
     }
   )),
 
-  on(saveEmployeesSuccess, state => (
+  on(saveEmployeesSuccess, (state, { employees }) => (
     {
       ...state,
+      employees: employees,
       loading: false
     }
   )),

@@ -1,0 +1,16 @@
+.employees-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  vertical-align: middle;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.employee {
+  row-gap: 1rem;
+  width: 20rem;
+  height: 200px;
+  border: 1px solid fuchsia;
+  padding:1rem;
+}
