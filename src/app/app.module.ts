@@ -11,17 +11,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { provideHttpClient } from '@angular/common/http';
+import { FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatCardModule,
     MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([])
   ],
