@@ -13,11 +13,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { SignupComponent } from './components/signup/signup.component';
 import { MatSelectModule } from '@angular/material/select';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { StoreModule } from '@ngrx/store';
-import { authFeature } from './store/reducer/auth.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './store/effects/auth.effects';
 
 @NgModule({
   declarations: [
@@ -34,10 +29,7 @@ import { AuthEffects } from './store/effects/auth.effects';
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatSelectModule,
-    MatProgressSpinnerModule,
-    StoreModule.forFeature(authFeature),
-    EffectsModule.forFeature([AuthEffects])
+    MatSelectModule
   ]
 })
 export class AuthModule { }
