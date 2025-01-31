@@ -1,9 +1,13 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private httpClient = inject(HttpClient);
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem('jwtToken');
@@ -12,5 +16,9 @@ export class AuthService {
 
   logOut(): void {
     localStorage.removeItem('jwtToken');
+  }
+
+  login(email: string, password: string): Observable<any> {
+    return this.httpClient.post('http://localhost:3001/signIn', { email, password });
   }
 }

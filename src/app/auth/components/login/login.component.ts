@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 })
 export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
   loginForm!: FormGroup;
   hidePassword: boolean = true;
 
@@ -27,6 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
+    const { email, password } = this.loginForm.value;
+    this.authService.login(email, password).subscribe();
   }
 }
