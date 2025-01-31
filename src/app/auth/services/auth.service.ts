@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { catchError, Observable, throwError } from 'rxjs';
+import { authFeature } from '../store/reducer/auth.reducer';
+import { logout } from '../store/actions/auth.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +11,14 @@ import { catchError, Observable, throwError } from 'rxjs';
 export class AuthService {
 
   private httpClient = inject(HttpClient);
+  private store$ = inject(Store);
 
-  isLoggedIn(): boolean {
-    const token = localStorage.getItem('jwtToken');
-    return !!token;
+  isLoggedIn(): Observable<boolean> {
+    return this.store$.select(authFeature.selectIsLoggedIn);
   }
 
   logOut(): void {
-    localStorage.removeItem('jwtToken');
+    this.store$.dispatch(() => logout());
   }
 
   login(email: string, password: string): Observable<any> {

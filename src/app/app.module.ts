@@ -13,6 +13,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { AppStoreModule } from './store/store.module';
+import { authFeature } from './auth/store/reducer/auth.reducer';
 
 @NgModule({
   declarations: [
@@ -27,8 +34,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({}, {}),
+    MatToolbarModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    StoreModule.forFeature(authFeature),
     EffectsModule.forRoot([]),
+    AppStoreModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       // logOnly: environment.production, // Restrict extension to log-only mode in production
