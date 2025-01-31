@@ -11,11 +11,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-
+import { SignupComponent } from './components/signup/signup.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
+    MatSelectModule
   ]
 })
 export class AuthModule { }
