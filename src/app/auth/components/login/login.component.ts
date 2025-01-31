@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   private store$ = inject(Store);
   loginForm!: FormGroup<LoginForm>;
   hidePassword: boolean = true;
-  errorMessage: string = '';
+  errorMessage$!: Observable<string>;
   isLoading$!: Observable<boolean>;
 
   ngOnInit(): void {
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
     this.isLoading$ = this.store$.select(authFeature.selectLoading);
+    this.errorMessage$ = this.store$.select(authFeature.selectError);
   }
 
   get email(): AbstractControl | null {

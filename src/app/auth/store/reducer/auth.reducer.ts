@@ -36,7 +36,8 @@ const reducer = createReducer(
       ...state,
       employee,
       loading: false,
-      isLoggedIn: true
+      isLoggedIn: true,
+      error: ''
     }
   }),
   on(loginFailure, (state, { error }) => {
