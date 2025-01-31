@@ -1,6 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { login } from '../../store/actions/auth.actions';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { authFeature } from '../../store/reducer/auth.reducer';
 
 export interface LoginForm {
   email: FormControl<string>;
@@ -14,16 +17,18 @@ export interface LoginForm {
 })
 export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
+  private store$ = inject(Store);
   loginForm!: FormGroup<LoginForm>;
   hidePassword: boolean = true;
   errorMessage: string = '';
+  isLoading$!: Observable<boolean>;
 
   ngOnInit(): void {
     this.loginForm = this.fb.nonNullable.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
-    })
+    });
+    this.isLoading$ = this.store$.select(authFeature.selectLoading);
   }
 
   get email(): AbstractControl | null {
@@ -36,10 +41,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const { email, password } = this.loginForm.value;
-    this.authService.login(email!, password!).subscribe((response) => {
-      // handle success
-    }, (error) => {
-      this.errorMessage = error?.error?.message
-    });
+    if (email && password) {
+      this.store$.dispatch(() => login({ email, password }));
+    }
   }
 }
