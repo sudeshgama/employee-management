@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,12 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.httpClient.post('http://localhost:3001/signIn', { email, password });
+    return this.httpClient.post('http://localhost:3001/signIn', { email, password })
+      .pipe(
+        catchError((error) => {
+          return throwError(() => error)
+        })
+      );
   }
 
   signUp(email: string, name: string, password: string, role: string): Observable<any> {
