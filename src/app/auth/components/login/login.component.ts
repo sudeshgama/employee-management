@@ -1,6 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+
+export interface LoginForm {
+  email: FormControl<string>;
+  password: FormControl<string>;
+}
 
 @Component({
   selector: 'app-login',
@@ -10,11 +15,11 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
-  loginForm!: FormGroup;
+  loginForm!: FormGroup<LoginForm>;
   hidePassword: boolean = true;
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
+    this.loginForm = this.fb.nonNullable.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     })
@@ -30,6 +35,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const { email, password } = this.loginForm.value;
-    this.authService.login(email, password).subscribe();
+    this.authService.login(email!, password!).subscribe();
   }
 }

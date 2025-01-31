@@ -21,4 +21,8 @@ export class AuthService {
   login(email: string, password: string): Observable<any> {
     return this.httpClient.post('http://localhost:3001/signIn', { email, password });
   }
+
+  signUp(email: string, name: string, password: string, role: string): Observable<any> {
+    return this.httpClient.post('http://localhost:3001/employee', { email, name, password, role });
+  }
 }

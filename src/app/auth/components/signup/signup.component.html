@@ -1,9 +1,9 @@
-<mat-card class="login-card">
+<mat-card class="signup-card">
   <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
+    <mat-card-title>Sign Up</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="loginForm"
+    <form [formGroup]="signupForm"
           (ngSubmit)="onSubmit()">
       <!-- Email Field -->
       <mat-form-field appearance="fill"
@@ -18,6 +18,34 @@
         </mat-error>
         <mat-error *ngIf="email?.hasError('email')">
           Please enter a valid email.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Full Name Field -->
+      <mat-form-field appearance="fill"
+                      class="full-width">
+        <mat-label>Full Name</mat-label>
+        <input matInput
+               formControlName="name"
+               required />
+        <mat-error *ngIf="fullName?.hasError('required')">
+          Full name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Role Dropdown -->
+      <mat-form-field appearance="fill"
+                      class="full-width">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role"
+                    required>
+          <mat-option *ngFor="let role of roles"
+                      [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="role?.hasError('required')">
+          Role is required.
         </mat-error>
       </mat-form-field>
 
@@ -49,13 +77,10 @@
       <button mat-raised-button
               color="primary"
               type="submit"
-              [disabled]="loginForm.invalid"
+              [disabled]="signupForm.invalid"
               class="full-width">
-        Login
+        Sign Up
       </button>
-      <a mat-button
-         color="primary"
-         routerLink="/auth/sign-up">Signup</a>
     </form>
   </mat-card-content>
 </mat-card>
