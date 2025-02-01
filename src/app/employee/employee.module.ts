@@ -9,8 +9,9 @@ import { EmployeeContainerComponent } from './containers/employee-container/empl
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EffectsModule } from '@ngrx/effects';
 import { EmployeeEffects } from './store/effects/employee.effects';
-import { HttpClient } from '@angular/common/http';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,8 @@ import { HttpClient } from '@angular/common/http';
   imports: [
     CommonModule,
     EmployeeRoutingModule,
+    MatCardModule,
+    MatIconModule,
     StoreModule.forFeature(employeeFeature),
     EffectsModule.forFeature([EmployeeEffects])
   ]

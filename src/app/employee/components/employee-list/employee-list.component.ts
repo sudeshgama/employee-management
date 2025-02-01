@@ -8,4 +8,14 @@ import { Employee } from '../../models/employee.model';
 })
 export class EmployeeListComponent {
   @Input({ required: true }) employeesList!: Employee[];
+
+  isAdmin = true;
+
+  editEmployee(employee: Employee) {
+
+  }
+
+  deleteEmployee(employeeId: string) {
+
+  }
 }
