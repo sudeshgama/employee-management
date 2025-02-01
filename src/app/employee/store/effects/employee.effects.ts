@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EmployeeService } from "../../services/employee.service";
 import { saveEmployees, saveEmployeesSuccess } from "../actions/employee.actions";
 import { catchError, EMPTY, exhaustMap, map } from "rxjs";
+import { EmployeeResponse } from "../../models/employee.model";
 
 @Injectable()
 export class EmployeeEffects {
@@ -14,7 +15,7 @@ export class EmployeeEffects {
       ofType(saveEmployees),
       exhaustMap(() => this.employeeService.getAllEmployees()
         .pipe(
-          map(employee => saveEmployeesSuccess({ employees: employee })),
+          map((employee: EmployeeResponse) => saveEmployeesSuccess({ employees: employee.data })),
           catchError(() => EMPTY)
         )
       )

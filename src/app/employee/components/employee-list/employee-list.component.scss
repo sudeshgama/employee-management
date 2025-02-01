@@ -1,16 +1,16 @@
 .employees-container {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  vertical-align: middle;
-  flex-direction: row;
-  gap: 20px;
+  gap: 16px; /* Adds spacing between cards */
+  padding: 16px;
 }
 
-.employee {
-  row-gap: 1rem;
-  width: 20rem;
-  height: 200px;
-  border: 1px solid fuchsia;
-  padding:1rem;
+.employee-card {
+  width: 300px; /* Fixed width for each card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  transition: transform 0.2s ease-in-out; /* Adds a hover effect */
+}
+
+.employee-card:hover {
+  transform: translateY(-5px); /* Lifts the card slightly on hover */
 }
