@@ -1,1 +1,82 @@
-<p>{{(employee$ | async) | json}}</p>
+<div *ngIf="employeeForm">
+  <h1>Edit Employee</h1>
+  <form [formGroup]="employeeForm"
+        (ngSubmit)="onSubmit()"
+        class="edit-employee-form">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput
+             formControlName="name"
+             required />
+      <mat-error *ngIf="employeeForm.get('name')?.hasError('required')">
+        Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput
+             formControlName="email"
+             type="email"
+             required />
+      <mat-error *ngIf="employeeForm.get('email')?.hasError('required')">
+        Email is required.
+      </mat-error>
+      <mat-error *ngIf="employeeForm.get('email')?.hasError('email')">
+        Please enter a valid email.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Position</mat-label>
+      <input matInput
+             formControlName="position"
+             required />
+      <mat-error *ngIf="employeeForm.get('position')?.hasError('required')">
+        Position is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Department</mat-label>
+      <mat-select formControlName="department"
+                  required>
+        <mat-option value="Engineering">Engineering</mat-option>
+        <mat-option value="HR">HR</mat-option>
+        <mat-option value="Sales">Sales</mat-option>
+        <mat-option value="Marketing">Marketing</mat-option>
+      </mat-select>
+      <mat-error *ngIf="employeeForm.get('department')?.hasError('required')">
+        Department is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Phone</mat-label>
+      <input matInput
+             formControlName="phone"
+             required />
+      <mat-error *ngIf="employeeForm.get('phone')?.hasError('required')">
+        Phone is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Error Message -->
+    @if (errorMessage$ | async) {
+    <div class="error-message">
+      {{ errorMessage$ | async }}
+    </div>
+    }
+
+    <button mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="employeeForm.invalid">
+      <span *ngIf="!(isLoading$ | async)">Save</span>
+      <span *ngIf="(isLoading$ | async)">
+        <mat-spinner diameter="20"
+                     color="accent"></mat-spinner>
+      </span>
+    </button>
+  </form>
+</div>

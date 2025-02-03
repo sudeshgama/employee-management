@@ -14,6 +14,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     EmployeeComponent,
@@ -26,6 +33,12 @@ import { EditEmployeeComponent } from './components/edit-employee/edit-employee.
     EmployeeRoutingModule,
     MatCardModule,
     MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
     StoreModule.forFeature(employeeFeature),
     EffectsModule.forFeature([EmployeeEffects])
   ]

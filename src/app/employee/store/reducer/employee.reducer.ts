@@ -1,18 +1,21 @@
 import { createFeature, createReducer, createSelector, on } from "@ngrx/store";
-import { saveEmployees, saveEmployeesSuccess, saveEmployeesFailure } from "../actions/employee.actions";
+import { saveEmployees, saveEmployeesSuccess, saveEmployeesFailure, updateEmployeeSuccess, updateEmployee, updateEmployeeFailure } from "../actions/employee.actions";
 import { Employee } from "../../models/employee.model";
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
+import { state } from "@angular/animations";
 
 export const FeatureKey = 'employee';
 
 export interface EmployeeState extends EntityState<Employee> {
   loading: boolean;
+  error: string;
 }
 
 export const adapter = createEntityAdapter<Employee>();
 
 export const initialState: EmployeeState = adapter.getInitialState({
   loading: false,
+  error: ''
 });
 
 const reducer = createReducer(
@@ -33,7 +36,23 @@ const reducer = createReducer(
       ...state,
       loading: false
     }
-  ))
+  )),
+
+  on(updateEmployee, state => ({
+    ...state,
+    loading: true
+  })),
+
+  on(updateEmployeeSuccess, (state, { employee }) => (
+    adapter.setOne(employee, { ...state, loading: false })
+  )),
+
+  on(updateEmployeeFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error
+  })),
+
 )
 
 export const employeeFeature = createFeature({
