@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
 import { authFeature } from '../store/reducer/auth.reducer';
 import { logout } from '../store/actions/auth.actions';
 
@@ -35,8 +35,10 @@ export class AuthService {
   }
 
   getToken(): Observable<string> {
-    return this.store$.select(authFeature.selectEmployee).pipe(map((employee) => {
-      return employee.token
-    }));
+    return this.store$.select(authFeature.selectToken);
+  }
+
+  isAdmin(): Observable<boolean> {
+    return this.store$.select(authFeature.selectIsAdmin);
   }
 }

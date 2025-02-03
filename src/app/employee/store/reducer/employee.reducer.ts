@@ -1,18 +1,19 @@
-import { createFeature, createReducer, on } from "@ngrx/store";
+import { createFeature, createReducer, createSelector, on } from "@ngrx/store";
 import { saveEmployees, saveEmployeesSuccess, saveEmployeesFailure } from "../actions/employee.actions";
 import { Employee } from "../../models/employee.model";
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 
 export const FeatureKey = 'employee';
 
-export interface State {
-  employees: Employee[],
+export interface EmployeeState extends EntityState<Employee> {
   loading: boolean;
 }
 
-export const initialState: State = {
-  employees: [],
+export const adapter = createEntityAdapter<Employee>();
+
+export const initialState: EmployeeState = adapter.getInitialState({
   loading: false,
-}
+});
 
 const reducer = createReducer(
   initialState,
@@ -24,11 +25,7 @@ const reducer = createReducer(
   )),
 
   on(saveEmployeesSuccess, (state, { employees }) => (
-    {
-      ...state,
-      employees: employees,
-      loading: false
-    }
+    adapter.setAll(employees, { ...state, loading: false })
   )),
 
   on(saveEmployeesFailure, state => (
@@ -41,12 +38,15 @@ const reducer = createReducer(
 
 export const employeeFeature = createFeature({
   name: FeatureKey,
-  reducer
+  reducer,
+  extraSelectors: ({ selectEmployeeState }) => ({
+    ...adapter.getSelectors(selectEmployeeState)
+  })
 })
 
 export const {
   name,
-  selectEmployees,
   selectEmployeeState,
+  selectAll,
   selectLoading
 } = employeeFeature;

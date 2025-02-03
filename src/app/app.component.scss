@@ -19,8 +19,11 @@ mat-sidenav-content {
   padding: 16px;
 }
 
-mat-list-item {
+.mat-list-item {
   display: flex;
-  align-items: center; /* Vertically center */
-  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically centers the icon and text */
+}
+
+.mat-icon {
+  margin-right: 8px; /* Adds spacing between the icon and text */
 }
