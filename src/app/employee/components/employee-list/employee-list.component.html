@@ -14,7 +14,7 @@
     <mat-card-actions *ngIf="isAdmin"
                       class="action-buttons">
       <button mat-icon-button
-              (click)="editEmployee(employee)">
+              (click)="editEmployee(employee.id)">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button

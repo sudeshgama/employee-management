@@ -39,8 +39,12 @@ const reducer = createReducer(
 export const employeeFeature = createFeature({
   name: FeatureKey,
   reducer,
-  extraSelectors: ({ selectEmployeeState }) => ({
-    ...adapter.getSelectors(selectEmployeeState)
+  extraSelectors: ({ selectEmployeeState, selectEntities }) => ({
+    ...adapter.getSelectors(selectEmployeeState),
+    selectEmployeeById: (id: string) => createSelector(
+      selectEntities,
+      (entities) => entities[id]!
+    )
   })
 })
 
@@ -48,5 +52,6 @@ export const {
   name,
   selectEmployeeState,
   selectAll,
-  selectLoading
+  selectLoading,
+  selectEmployeeById
 } = employeeFeature;
