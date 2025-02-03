@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, output } from '@angular/core';
 import { Employee } from '../../models/employee.model';
 
 @Component({
@@ -11,8 +11,10 @@ export class EmployeeListComponent {
 
   @Input({ required: true }) isAdmin!: boolean;
 
-  editEmployee(employee: Employee) {
+  @Output() editEmployeeEvent: EventEmitter<string> = new EventEmitter<string>();
 
+  editEmployee(employeeId: string) {
+    this.editEmployeeEvent.emit(employeeId);
   }
 
   deleteEmployee(employeeId: string) {
