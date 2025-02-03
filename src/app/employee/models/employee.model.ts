@@ -1,5 +1,5 @@
 export interface Employee {
-  id: string;
+  id?: string;
   name: string;
   position: string;
   department: string;
@@ -9,4 +9,8 @@ export interface Employee {
 
 export interface EmployeeResponse {
   data: Employee[];
+}
+
+export interface UpdateEmployeeResponse {
+  data: Employee;
 }
