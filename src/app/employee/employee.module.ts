@@ -12,12 +12,14 @@ import { EmployeeEffects } from './store/effects/employee.effects';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 
 @NgModule({
   declarations: [
     EmployeeComponent,
     EmployeeContainerComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    EditEmployeeComponent
   ],
   imports: [
     CommonModule,

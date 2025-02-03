@@ -1,4 +1,5 @@
 <h1>Employees</h1>
 
 <app-employee-list [employeesList]="(employees$ | async)!"
-                   [isAdmin]="(isAdmin$| async)!"></app-employee-list>
+                   [isAdmin]="(isAdmin$| async)!"
+                   (editEmployeeEvent)="editEmployee($event)"></app-employee-list>
