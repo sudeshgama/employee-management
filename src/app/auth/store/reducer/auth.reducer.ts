@@ -2,25 +2,19 @@ import { createFeature, createReducer, on } from "@ngrx/store";
 import { login, loginFailure, loginSuccess, logout } from "../actions/auth.actions";
 
 interface State {
-  employee: {
-    token: string;
-    email: string;
-    role: string;
-  },
   loading: boolean;
   error: string;
   isLoggedIn: boolean;
+  token: string;
+  isAdmin: boolean;
 }
 
 const initialLoginState: State = {
-  employee: {
-    token: '',
-    email: '',
-    role: '',
-  },
   loading: false,
   error: '',
-  isLoggedIn: false
+  isLoggedIn: false,
+  token: '',
+  isAdmin: false
 }
 
 const reducer = createReducer(
@@ -34,9 +28,10 @@ const reducer = createReducer(
   on(loginSuccess, (state, { employee }) => {
     return {
       ...state,
-      employee,
       loading: false,
       isLoggedIn: true,
+      token: employee.token,
+      isAdmin: employee.role === 'admin',
       error: ''
     }
   }),
@@ -50,11 +45,8 @@ const reducer = createReducer(
   on(logout, (state) => {
     return {
       ...state,
-      employee: {
-        email: '',
-        token: '',
-        role: ''
-      },
+      token: '',
+      isAdmin: false,
       isLoggedIn: false
     }
   })
@@ -65,4 +57,4 @@ export const authFeature = createFeature({
   reducer
 });
 
-export const { selectEmployee, selectLoading, selectError, selectIsLoggedIn } = authFeature;
+export const { selectLoading, selectError, selectIsLoggedIn, selectToken, selectIsAdmin } = authFeature;

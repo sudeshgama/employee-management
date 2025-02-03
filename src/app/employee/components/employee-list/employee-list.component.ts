@@ -9,7 +9,7 @@ import { Employee } from '../../models/employee.model';
 export class EmployeeListComponent {
   @Input({ required: true }) employeesList!: Employee[];
 
-  isAdmin = true;
+  @Input({ required: true }) isAdmin!: boolean;
 
   editEmployee(employee: Employee) {
 

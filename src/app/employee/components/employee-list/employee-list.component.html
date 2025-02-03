@@ -8,9 +8,11 @@
     <mat-card-content>
       <p><strong>Department:</strong> {{ employee.department }}</p>
       <p><strong>Email:</strong> {{ employee.email }}</p>
+      <p><strong>Phone:</strong> {{ employee.phone }}</p>
     </mat-card-content>
     <!-- Edit and Delete Icons -->
-    <mat-card-actions *ngIf="isAdmin">
+    <mat-card-actions *ngIf="isAdmin"
+                      class="action-buttons">
       <button mat-icon-button
               (click)="editEmployee(employee)">
         <mat-icon>edit</mat-icon>
