@@ -2,4 +2,5 @@
 
 <app-employee-list [employeesList]="(employees$ | async)!"
                    [isAdmin]="(isAdmin$| async)!"
-                   (editEmployeeEvent)="editEmployee($event)"></app-employee-list>
+                   (editEmployeeEvent)="editEmployee($event)"
+                   (deleteEmployeeEvent)="deleteEmployee($event)"></app-employee-list>

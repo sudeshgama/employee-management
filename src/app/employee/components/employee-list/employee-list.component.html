@@ -11,14 +11,14 @@
       <p><strong>Phone:</strong> {{ employee.phone }}</p>
     </mat-card-content>
     <!-- Edit and Delete Icons -->
-    <mat-card-actions *ngIf="isAdmin"
+    <mat-card-actions *ngIf="isAdmin && !(employee.role==='admin')"
                       class="action-buttons">
       <button mat-icon-button
-              (click)="editEmployee(employee.id)">
+              (click)="editEmployee(employee.id!)">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button
-              (click)="deleteEmployee(employee.id)">
+              (click)="deleteEmployee(employee.id!)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-card-actions>

@@ -13,11 +13,13 @@ export class EmployeeListComponent {
 
   @Output() editEmployeeEvent: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output() deleteEmployeeEvent: EventEmitter<string> = new EventEmitter<string>();
+
   editEmployee(employeeId: string) {
     this.editEmployeeEvent.emit(employeeId);
   }
 
   deleteEmployee(employeeId: string) {
-
+    this.deleteEmployeeEvent.emit(employeeId);
   }
 }
