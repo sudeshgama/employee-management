@@ -2,7 +2,6 @@ import { createFeature, createReducer, createSelector, on } from "@ngrx/store";
 import { saveEmployees, saveEmployeesSuccess, saveEmployeesFailure, updateEmployeeSuccess, updateEmployee, updateEmployeeFailure, deleteEmployeeSuccess, deleteEmployee, deleteEmployeeFailure } from "../actions/employee.actions";
 import { Employee } from "../../models/employee.model";
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { state } from "@angular/animations";
 
 export const FeatureKey = 'employee';
 
@@ -38,10 +37,12 @@ const reducer = createReducer(
     }
   )),
 
-  on(updateEmployee, state => ({
-    ...state,
-    loading: true
-  })),
+  on(updateEmployee, state => (
+    {
+      ...state,
+      loading: false
+    }
+  )),
 
   on(updateEmployeeSuccess, (state, { employee }) => (
     adapter.setOne(employee, { ...state, loading: false })
@@ -50,7 +51,7 @@ const reducer = createReducer(
   on(updateEmployeeFailure, (state, { error }) => ({
     ...state,
     loading: false,
-    error: error
+    error: error,
   })),
 
   on(deleteEmployee, (state) => ({
@@ -64,7 +65,7 @@ const reducer = createReducer(
 
   on(deleteEmployeeFailure, (state, { error }) => ({
     ...state,
-    loading: true,
+    loading: false,
     error
   })),
 

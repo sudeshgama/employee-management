@@ -35,7 +35,7 @@ export class EmployeeEffects {
             return updateEmployeeSuccess({ employee: response.data });
           }),
           catchError((error: HttpErrorResponse) => {
-            return of(updateEmployeeFailure({ error: error?.error?.message }))
+            return of(updateEmployeeFailure({ error: error.statusText }))
           })
         );
       })

@@ -36,6 +36,6 @@ export const deleteEmployeeSuccess = createAction(
 );
 
 export const deleteEmployeeFailure = createAction(
-  '[Employees] Update Employee Failure',
+  '[Employees] Delete Employee Failure',
   props<{ error: string }>()
 );
