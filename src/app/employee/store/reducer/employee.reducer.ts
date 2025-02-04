@@ -88,5 +88,6 @@ export const {
   selectEmployeeState,
   selectAll,
   selectLoading,
+  selectIds,
   selectEmployeeById
 } = employeeFeature;
