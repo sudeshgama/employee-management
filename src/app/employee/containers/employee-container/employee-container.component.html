@@ -1,6 +1,6 @@
 <h1>Employees</h1>
 
-<app-employee-list [employeesList]="(employees$ | async)!"
-                   [isAdmin]="(isAdmin$| async)!"
+<app-employee-list [employeesList]="employees() ?? []"
+                   [isAdmin]="isAdmin() ?? false"
                    (editEmployeeEvent)="editEmployee($event)"
                    (deleteEmployeeEvent)="deleteEmployee($event)"></app-employee-list>

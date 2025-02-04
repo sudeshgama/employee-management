@@ -8,6 +8,7 @@ import { authFeature } from '../../../auth/store/reducer/auth.reducer';
 import { Router } from '@angular/router';
 import { DeleteEmployeeComponent } from '../../components/delete-employee/delete-employee.component';
 import { MatDialog } from '@angular/material/dialog';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-employee-container',
@@ -19,15 +20,11 @@ export class EmployeeContainerComponent implements OnInit {
   private router = inject(Router);
   private dialog = inject(MatDialog);
 
-
-  employees$!: Observable<Employee[]>;
-  isAdmin$!: Observable<boolean>;
-
+  employees = toSignal(this.store$.select(employeeFeature.selectAll));
+  isAdmin = toSignal(this.store$.select(authFeature.selectIsAdmin));
 
   ngOnInit(): void {
     this.store$.dispatch(() => saveEmployees());
-    this.employees$ = this.store$.select(employeeFeature.selectAll);
-    this.isAdmin$ = this.store$.select(authFeature.selectIsAdmin);
   }
 
   editEmployee(employeeId: string) {
