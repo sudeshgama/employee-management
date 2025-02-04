@@ -20,13 +20,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DeleteEmployeeComponent } from './components/delete-employee/delete-employee.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     EmployeeComponent,
     EmployeeContainerComponent,
     EmployeeListComponent,
-    EditEmployeeComponent
+    EditEmployeeComponent,
+    DeleteEmployeeComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSelectModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     StoreModule.forFeature(employeeFeature),
     EffectsModule.forFeature([EmployeeEffects])
   ]

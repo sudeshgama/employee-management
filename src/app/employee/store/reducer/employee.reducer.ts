@@ -1,5 +1,5 @@
 import { createFeature, createReducer, createSelector, on } from "@ngrx/store";
-import { saveEmployees, saveEmployeesSuccess, saveEmployeesFailure, updateEmployeeSuccess, updateEmployee, updateEmployeeFailure } from "../actions/employee.actions";
+import { saveEmployees, saveEmployeesSuccess, saveEmployeesFailure, updateEmployeeSuccess, updateEmployee, updateEmployeeFailure, deleteEmployeeSuccess, deleteEmployee, deleteEmployeeFailure } from "../actions/employee.actions";
 import { Employee } from "../../models/employee.model";
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { state } from "@angular/animations";
@@ -51,6 +51,21 @@ const reducer = createReducer(
     ...state,
     loading: false,
     error: error
+  })),
+
+  on(deleteEmployee, (state) => ({
+    ...state,
+    loading: true
+  })),
+
+  on(deleteEmployeeSuccess, (state, { id }) => (
+    adapter.removeOne(id, { ...state, loading: false })
+  )),
+
+  on(deleteEmployeeFailure, (state, { error }) => ({
+    ...state,
+    loading: true,
+    error
   })),
 
 )

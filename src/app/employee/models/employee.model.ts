@@ -5,6 +5,7 @@ export interface Employee {
   department: string;
   email: string;
   phone: string;
+  role?: string;
 }
 
 export interface EmployeeResponse {
@@ -13,4 +14,10 @@ export interface EmployeeResponse {
 
 export interface UpdateEmployeeResponse {
   data: Employee;
+}
+
+export interface DeleteEmployeeResponse {
+  data: {
+    id: string
+  };
 }

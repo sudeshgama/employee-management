@@ -1,8 +1,8 @@
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EmployeeService } from "../../services/employee.service";
-import { saveEmployees, saveEmployeesSuccess, updateEmployee, updateEmployeeFailure, updateEmployeeSuccess } from "../actions/employee.actions";
-import { catchError, EMPTY, exhaustMap, map, mergeMap, of, tap } from "rxjs";
+import { deleteEmployee, deleteEmployeeFailure, deleteEmployeeSuccess, saveEmployees, saveEmployeesSuccess, updateEmployee, updateEmployeeFailure, updateEmployeeSuccess } from "../actions/employee.actions";
+import { catchError, EMPTY, exhaustMap, map, mergeMap, of, switchMap, tap } from "rxjs";
 import { EmployeeResponse } from "../../models/employee.model";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
@@ -51,5 +51,22 @@ export class EmployeeEffects {
     )
   }, {
     dispatch: false
+  });
+
+  deleteEmployee$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(deleteEmployee),
+      switchMap(action => {
+        const { id } = action;
+        return this.employeeService.deleteEmployee(id).pipe(
+          map((response) => {
+            return deleteEmployeeSuccess({ id: response.data.id })
+          }),
+          catchError((error: HttpErrorResponse) => {
+            return of(deleteEmployeeFailure(error))
+          })
+        )
+      })
+    )
   })
 }
