@@ -1,8 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { employeeFeature, EmployeeState, selectEmployeeById } from '../../store/reducer/employee.reducer';
-import { Employee } from '../../models/employee.model';
-import { Observable, of } from 'rxjs';
+import { employeeFeature, EmployeeState } from '../../store/reducer/employee.reducer';
 import { deleteEmployee, saveEmployees } from '../../store/actions/employee.actions';
 import { authFeature } from '../../../auth/store/reducer/auth.reducer';
 import { Router } from '@angular/router';
