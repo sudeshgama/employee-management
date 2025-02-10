@@ -1,10 +1,10 @@
 export interface Employee {
   id?: string;
-  name: string;
-  position: string;
-  department: string;
-  email: string;
-  phone: string;
+  name?: string;
+  position?: string;
+  department?: string;
+  email?: string;
+  phone?: string;
   role?: string;
 }
 
