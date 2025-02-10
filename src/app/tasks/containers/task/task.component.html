@@ -6,12 +6,12 @@
     <h2>New</h2>
     <div cdkDropList
          #newList="cdkDropList"
-         [cdkDropListData]="newTasks"
+         [cdkDropListData]="(newTasks$ | async)!"
          [cdkDropListConnectedTo]="[inProgressList, completedList]"
          (cdkDropListDropped)="onTaskDrop($event)"
          class="task-list">
-      <div *ngFor="let task of newTasks"
-           cdkDrag
+      @for (task of (newTasks$ | async); track $index) {
+      <div cdkDrag
            class="task-card">
         <mat-card>
           <mat-card-header>
@@ -22,6 +22,7 @@
           </mat-card-content>
         </mat-card>
       </div>
+      }
     </div>
   </div>
 
@@ -30,12 +31,12 @@
     <h2>In Progress</h2>
     <div cdkDropList
          #inProgressList="cdkDropList"
-         [cdkDropListData]="inProgressTasks"
+         [cdkDropListData]="(inProgressTasks$ | async)!"
          [cdkDropListConnectedTo]="[newList, completedList]"
          (cdkDropListDropped)="onTaskDrop($event)"
          class="task-list">
-      <div *ngFor="let task of inProgressTasks"
-           cdkDrag
+      @for (task of (inProgressTasks$ | async); track $index) {
+      <div cdkDrag
            class="task-card">
         <mat-card>
           <mat-card-header>
@@ -46,6 +47,8 @@
           </mat-card-content>
         </mat-card>
       </div>
+      }
+
     </div>
   </div>
 
@@ -54,12 +57,12 @@
     <h2>Completed</h2>
     <div cdkDropList
          #completedList="cdkDropList"
-         [cdkDropListData]="completedTasks"
+         [cdkDropListData]="(completedTasks$ | async)!"
          [cdkDropListConnectedTo]="[newList, inProgressList]"
          (cdkDropListDropped)="onTaskDrop($event)"
          class="task-list">
-      <div *ngFor="let task of completedTasks"
-           cdkDrag
+      @for (task of (completedTasks$ | async); track $index) {
+      <div cdkDrag
            class="task-card">
         <mat-card>
           <mat-card-header>
@@ -70,6 +73,7 @@
           </mat-card-content>
         </mat-card>
       </div>
+      }
     </div>
   </div>
 </div>
