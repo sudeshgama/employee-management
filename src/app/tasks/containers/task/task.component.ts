@@ -3,8 +3,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Observable } from 'rxjs';
 import { Task } from '../../models/task.model';
 import { Store } from '@ngrx/store';
-import { selectCompletedTasks, selectInProgressTasks, selectNewTasks, TaskState } from '../../store/reducer/task.reducer';
-import { CreateNewTask, SaveTasks } from '../../store/actions/task.actions';
+import { selectCompletedTasks, selectInProgressTasks, selectNewTasks, TaskState, TaskStatus } from '../../store/reducer/task.reducer';
+import { CreateNewTask, SaveTasks, UpdateTask } from '../../store/actions/task.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from '../../components/create-task/create-task.component';
 
@@ -31,17 +31,36 @@ export class TaskComponent implements OnInit {
 
   // Handle task drop event
   onTaskDrop(event: CdkDragDrop<Task[]>) {
+
     if (event.previousContainer === event.container) {
       // Move task within the same list
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      // Move task to a different list
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
+
+      // Move task to a different list
+      const movedTask = Object.assign({}, event.container.data[event.currentIndex]);
+      if (event.container.id == 'inProgressList') {
+        movedTask.status = TaskStatus.IN_PROGRESS;
+        this.store$.dispatch(() => UpdateTask({ id: movedTask.id!, task: movedTask }))
+      }
+
+      if (event.container.id == 'newList') {
+        movedTask.status = TaskStatus.NEW;
+        this.store$.dispatch(() => UpdateTask({ id: movedTask.id!, task: movedTask }))
+      }
+
+      if (event.container.id == 'completedList') {
+        movedTask.status = TaskStatus.COMPLETED;
+        this.store$.dispatch(() => UpdateTask({ id: movedTask.id!, task: movedTask }))
+      }
+
     }
   }
 

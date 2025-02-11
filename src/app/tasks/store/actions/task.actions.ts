@@ -29,3 +29,18 @@ export const CreateNewTaskFailure = createAction(
   '[Tasks] Create New Task Failure',
   props<{ error: string }>()
 )
+
+export const UpdateTask = createAction(
+  '[Tasks] Update Task',
+  props<{ id: string, task: Task }>()
+)
+
+export const UpdateTaskSuccess = createAction(
+  '[Tasks] Update Task Success',
+  props<{ task: Task }>()
+)
+
+export const UpdateTaskFailure = createAction(
+  '[Tasks] Update Task Failure',
+  props<{ error: string }>()
+)

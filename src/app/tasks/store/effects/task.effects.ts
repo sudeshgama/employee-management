@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { TaskService } from "../../services/task.service";
-import { CreateNewTask, CreateNewTaskSuccess, SaveTasks, SaveTasksFailure, SaveTasksSuccess } from "../actions/task.actions";
+import { CreateNewTask, CreateNewTaskSuccess, SaveTasks, SaveTasksFailure, SaveTasksSuccess, UpdateTask, UpdateTaskFailure, UpdateTaskSuccess } from "../actions/task.actions";
 import { catchError, map, of, switchMap } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -41,5 +41,22 @@ export class TaskEffects {
         )
       })
     )
-  })
+  });
+
+  updateTask$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(UpdateTask),
+      switchMap((data) => {
+        const { id, task } = data;
+        return this.taskService.updateTask(id, task).pipe(
+          map((response) => {
+            return UpdateTaskSuccess({ task: response.data })
+          }),
+          catchError((error: HttpErrorResponse) => {
+            return of(UpdateTaskFailure(error))
+          })
+        )
+      })
+    )
+  });
 }

@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityState } from "@ngrx/entity";
 import { createFeature, createReducer, createSelector, on } from "@ngrx/store";
-import { SaveTasks, SaveTasksFailure, SaveTasksSuccess } from "../actions/task.actions";
+import { CreateNewTaskSuccess, SaveTasks, SaveTasksFailure, SaveTasksSuccess, UpdateTask, UpdateTaskSuccess } from "../actions/task.actions";
 import { Task } from "../../models/task.model";
 
 export enum TaskStatus {
@@ -32,12 +32,18 @@ const reducer = createReducer(
   on(SaveTasksSuccess, (state, { tasks }) => (
     adapter.setAll(tasks, { ...state, loading: false })
   )),
+  on(CreateNewTaskSuccess, (state, { task }) => (
+    adapter.setOne(task, { ...state, loading: false })
+  )),
   on(SaveTasksFailure, (state, { error }) => (
     {
       ...state,
       error,
       loading: false
     }
+  )),
+  on(UpdateTaskSuccess, (state, { task }) => (
+    adapter.setOne(task, { ...state, loading: false })
   ))
 )
 
