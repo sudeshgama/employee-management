@@ -21,12 +21,20 @@
           <mat-card-content>
             <p>{{ task.description }}</p>
           </mat-card-content>
+          <mat-card-actions>
+            <button mat-icon-button
+                    color="warn"
+                    class="fab-button"
+                    (click)="deleteTask(task.id!)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
         </mat-card>
       </div>
       }
 
       @if((newTasks$ | async)!.length === 0) {
-      <button mat-fab
+      <button mat-icon-button
               color="primary"
               class="fab-button"
               (click)="openTaskForm()">
@@ -58,6 +66,14 @@
           <mat-card-content>
             <p>{{ task.description }}</p>
           </mat-card-content>
+          <mat-card-actions>
+            <button mat-icon-button
+                    color="warn"
+                    class="fab-button"
+                    (click)="deleteTask(task.id!)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
         </mat-card>
       </div>
       }
@@ -85,6 +101,14 @@
           <mat-card-content>
             <p>{{ task.description }}</p>
           </mat-card-content>
+          <mat-card-actions>
+            <button mat-icon-button
+                    color="warn"
+                    class="fab-button"
+                    (click)="deleteTask(task.id!)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
         </mat-card>
       </div>
       }

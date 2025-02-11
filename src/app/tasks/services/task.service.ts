@@ -35,4 +35,12 @@ export class TaskService {
       })
     )
   }
+
+  deleteTask(id: string): Observable<UpdateTaskResponseData> {
+    return this.httpClient.delete<UpdateTaskResponseData>(`${this.endPointUrl}/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
+    )
+  }
 }
