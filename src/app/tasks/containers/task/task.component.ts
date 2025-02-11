@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Task } from '../../models/task.model';
 import { Store } from '@ngrx/store';
 import { selectCompletedTasks, selectInProgressTasks, selectNewTasks, TaskState, TaskStatus } from '../../store/reducer/task.reducer';
-import { CreateNewTask, SaveTasks, UpdateTask } from '../../store/actions/task.actions';
+import { CreateNewTask, DeleteTask, SaveTasks, UpdateTask } from '../../store/actions/task.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from '../../components/create-task/create-task.component';
 
@@ -57,7 +57,7 @@ export class TaskComponent implements OnInit {
       }
 
       if (event.container.id == 'completedList') {
-        movedTask.status = TaskStatus.COMPLETED;
+        movedTask.status = TaskStatus.DONE;
         this.store$.dispatch(() => UpdateTask({ id: movedTask.id!, task: movedTask }))
       }
 
@@ -75,5 +75,9 @@ export class TaskComponent implements OnInit {
         this.store$.dispatch(() => CreateNewTask({ task }));
       }
     })
+  }
+
+  deleteTask(id: string) {
+    this.store$.dispatch(() => DeleteTask({ id }))
   }
 }
