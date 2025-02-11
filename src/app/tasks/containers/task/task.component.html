@@ -6,6 +6,7 @@
     <h2>New</h2>
     <div cdkDropList
          #newList="cdkDropList"
+         id="newList"
          [cdkDropListData]="(newTasks$ | async)!"
          [cdkDropListConnectedTo]="[inProgressList, completedList]"
          (cdkDropListDropped)="onTaskDrop($event)"
@@ -42,6 +43,7 @@
     <h2>In Progress</h2>
     <div cdkDropList
          #inProgressList="cdkDropList"
+         id="inProgressList"
          [cdkDropListData]="(inProgressTasks$ | async)!"
          [cdkDropListConnectedTo]="[newList, completedList]"
          (cdkDropListDropped)="onTaskDrop($event)"
@@ -68,6 +70,7 @@
     <h2>Completed</h2>
     <div cdkDropList
          #completedList="cdkDropList"
+         id="completedList"
          [cdkDropListData]="(completedTasks$ | async)!"
          [cdkDropListConnectedTo]="[newList, inProgressList]"
          (cdkDropListDropped)="onTaskDrop($event)"

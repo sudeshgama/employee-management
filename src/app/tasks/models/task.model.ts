@@ -15,3 +15,8 @@ export interface CreateTaskResponseData {
   data: Task;
   message?: string;
 }
+
+export interface UpdateTaskResponseData {
+  data: Task;
+  message?: string;
+}
