@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { Task } from '../../models/task.model';
 import { Store } from '@ngrx/store';
 import { selectCompletedTasks, selectInProgressTasks, selectNewTasks, TaskState } from '../../store/reducer/task.reducer';
-import { SaveTasks } from '../../store/actions/task.actions';
+import { CreateNewTask, SaveTasks } from '../../store/actions/task.actions';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateTaskComponent } from '../../components/create-task/create-task.component';
 
 
 @Component({
@@ -18,6 +20,7 @@ export class TaskComponent implements OnInit {
   inProgressTasks$!: Observable<Task[]>;
   newTasks$!: Observable<Task[]>;
   completedTasks$!: Observable<Task[]>;
+  private dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.store$.dispatch(() => SaveTasks());
@@ -40,5 +43,18 @@ export class TaskComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  openTaskForm() {
+    const dialogRef = this.dialog.open(CreateTaskComponent, {
+      width: '500px'
+    });
+
+    // perform delete action
+    dialogRef.afterClosed().subscribe((task: Task) => {
+      if (task) {
+        this.store$.dispatch(() => CreateNewTask({ task }));
+      }
+    })
   }
 }

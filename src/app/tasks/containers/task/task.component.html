@@ -23,6 +23,17 @@
         </mat-card>
       </div>
       }
+
+      @if((newTasks$ | async)!.length === 0) {
+      <button mat-fab
+              color="primary"
+              class="fab-button"
+              (click)="openTaskForm()">
+        <mat-icon>add</mat-icon>
+      </button>
+      }
+
+
     </div>
   </div>
 

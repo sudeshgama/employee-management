@@ -14,3 +14,18 @@ export const SaveTasksFailure = createAction(
   '[Tasks] Save Tasks Failure',
   props<{ error: string }>()
 );
+
+export const CreateNewTask = createAction(
+  '[Tasks] Create New Task',
+  props<{ task: Task }>()
+)
+
+export const CreateNewTaskSuccess = createAction(
+  '[Tasks] Create New Task Success',
+  props<{ task: Task }>()
+)
+
+export const CreateNewTaskFailure = createAction(
+  '[Tasks] Create New Task Failure',
+  props<{ error: string }>()
+)

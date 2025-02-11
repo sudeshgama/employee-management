@@ -10,3 +10,8 @@ export interface Task {
 export interface TaskResponseData {
   data: Task[];
 }
+
+export interface CreateTaskResponseData {
+  data: Task;
+  message?: string;
+}
