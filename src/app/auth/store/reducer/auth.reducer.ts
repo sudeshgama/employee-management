@@ -14,7 +14,7 @@ const initialLoginState: State = {
   error: '',
   isLoggedIn: false,
   token: '',
-  isAdmin: false
+  isAdmin: false,
 }
 
 const reducer = createReducer(
@@ -32,7 +32,7 @@ const reducer = createReducer(
       isLoggedIn: true,
       token: employee.token,
       isAdmin: employee.role === 'admin',
-      error: ''
+      error: '',
     }
   }),
   on(loginFailure, (state, { error }) => {

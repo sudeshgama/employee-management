@@ -10,6 +10,9 @@ export const environment = {
     },
     employees: {
       apiUrl: '/api/employees'
+    },
+    tasks: {
+      apiUrl: '/api/tasks'
     }
   }
 };

@@ -6,6 +6,10 @@ import { TaskComponent } from './containers/task/task.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { StoreModule } from '@ngrx/store';
+import { taskFeature } from './store/reducer/task.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { TaskEffects } from './store/effects/task.effects';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     CommonModule,
     DragDropModule,
     MatCardModule,
-    TasksRoutingModule
+    TasksRoutingModule,
+    StoreModule.forFeature(taskFeature),
+    EffectsModule.forFeature([TaskEffects])
   ]
 })
 export class TasksModule { }
